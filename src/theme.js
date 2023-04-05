@@ -25,7 +25,12 @@ const theme = {
   padding: {
     default: 10,
     default2: 20,
+    min:5,
   },
+  borderRadius: {
+    image:5,
+    button:5,
+  }
 };
 
 export default theme;

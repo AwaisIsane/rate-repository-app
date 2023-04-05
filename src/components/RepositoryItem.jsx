@@ -6,26 +6,28 @@ import theme from "../theme";
 
 const FlexItem = ({ text, value }) => {
   return (
-    <View style={styles.flexItem}>
-      <Text fontWeight="bold">{text}</Text>
-      <Text color="textSecondary">{kNumFormatter(value)}</Text>
+    <View style={styles.flexContainerThreeItem}>
+      <Text fontWeight="bold">{kNumFormatter(value)}</Text>
+      <Text color="textSecondary">{text}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  flexContainer: {
+  flexContainerThree: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
+    maxWidth: 300,
   },
   imageContainer: {
     marginRight: theme.margin.default,
   },
-  flexItem: {
-    flexGrow: 1,
+  flexContainerThreeItem: {
     paddingLeft: theme.padding.default2,
     paddingRight: theme.padding.default2,
+    flexDirection: "column",
+    alignItems: "center",
   },
   flexContainerOne: {
     display: "flex",
@@ -35,14 +37,15 @@ const styles = StyleSheet.create({
     width: 66,
     height: 58,
     padding: theme.padding.default,
+    borderRadius: theme.borderRadius.image,
   },
-  repoItem: {
+  container: {
     padding: theme.padding.default,
     borderBottomColor: theme.colors.textSecondary,
     borderBottomWidth: 5,
     borderBottomStyle: "solid,",
   },
-  textBox: {
+  flexContainerTwo: {
     // width: 0,
     // flexGrow: 1,
     // marginBottom: theme.margin.default,
@@ -60,17 +63,17 @@ const styles = StyleSheet.create({
   language: {
     backgroundColor: theme.colors.blue,
     color: theme.colors.white,
-    padding: 5,
+    padding: theme.padding.min,
     marginTop: theme.margin.default,
     marginBottom: theme.margin.default,
-    borderRadius: 5,
+    borderRadius: theme.borderRadius.button,
     flexShrink: 1,
   },
 });
 
 const RepositoryItem = ({ item }) => {
   return (
-    <View style={styles.repoItem}>
+    <View style={styles.container}>
       <View style={styles.flexContainerOne}>
         <View style={styles.imageContainer}>
           <Image
@@ -78,7 +81,7 @@ const RepositoryItem = ({ item }) => {
             source={{ uri: item.ownerAvatarUrl }}
           />
         </View>
-        <View style={styles.textBox}>
+        <View style={styles.flexContainerTwo}>
           <View style={styles.fullName}>
             <Text fontWeight="bold">{item.fullName}</Text>
           </View>
@@ -90,7 +93,7 @@ const RepositoryItem = ({ item }) => {
           </View>
         </View>
       </View>
-      <View style={styles.flexContainer}>
+      <View style={styles.flexContainerThree}>
         <FlexItem text="stars" value={item.stargazersCount} />
         <FlexItem text="forks" value={item.forksCount} />
         <FlexItem text="review" value={item.reviewCount} />

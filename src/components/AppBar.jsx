@@ -8,20 +8,22 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight + 16,
     backgroundColor: theme.colors.backgroundSecondary,
     paddingBottom:16,
-    marginBottom:theme.margin.default,
-
 
   },
   text: {
     color: theme.colors.white,
     fontWeight: theme.fontWeights.bold,
   },
+
+  button : {
+    padding:theme.padding.default,
+  }
 });
 
 const AppBar = () => {
   return (
     <View style={styles.container}>
-      <Pressable>
+      <Pressable style={styles.button}>
         <Text color="textSecondary" fontWeight="bold" style={styles.text}>
           Repositories
         </Text>
