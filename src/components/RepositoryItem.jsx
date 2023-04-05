@@ -1,5 +1,5 @@
 import { Image, View } from "react-native";
-import { StyleSheet, Text as NativeText } from "react-native-web";
+import { StyleSheet } from "react-native-web";
 import { kNumFormatter } from "../utils";
 import Text from "./Text";
 import theme from "../theme";
@@ -19,50 +19,73 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
   },
+  imageContainer: {
+    marginRight: theme.margin.default,
+  },
   flexItem: {
     flexGrow: 1,
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: theme.padding.default2,
+    paddingRight: theme.padding.default2,
   },
-  flexContainerImage: {
+  flexContainerOne: {
     display: "flex",
     flexDirection: "row",
   },
   imageAvtar: {
     width: 66,
     height: 58,
+    padding: theme.padding.default,
   },
   repoItem: {
     padding: theme.padding.default,
+    borderBottomColor: theme.colors.textSecondary,
+    borderBottomWidth: 5,
+    borderBottomStyle: "solid,",
   },
   textBox: {
-    width: 0,
-    flexGrow: 1,
-    marginLeft: 'gutter',
+    // width: 0,
+    // flexGrow: 1,
+    // marginBottom: theme.margin.default,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    flex: 0.8,
   },
-  fullName: {},
+  fullName: {
+    fontSize: theme.fontSizes.subheading,
+    marginBottom: theme.margin.default,
+  },
   description: {},
-  language: {},
+  language: {
+    backgroundColor: theme.colors.blue,
+    color: theme.colors.white,
+    padding: 5,
+    marginTop: theme.margin.default,
+    marginBottom: theme.margin.default,
+    borderRadius: 5,
+    flexShrink: 1,
+  },
 });
 
 const RepositoryItem = ({ item }) => {
   return (
     <View style={styles.repoItem}>
-      <View style={styles.flexContainerImage}>
-        <View>
+      <View style={styles.flexContainerOne}>
+        <View style={styles.imageContainer}>
           <Image
             style={styles.imageAvtar}
             source={{ uri: item.ownerAvatarUrl }}
           />
         </View>
         <View style={styles.textBox}>
-          <View>
-            <Text>{item.fullName}</Text>
+          <View style={styles.fullName}>
+            <Text fontWeight="bold">{item.fullName}</Text>
           </View>
           <View>
             <Text>{item.description}</Text>
           </View>
-          <View>
+          <View style={styles.language}>
             <Text>{item.language}</Text>
           </View>
         </View>
