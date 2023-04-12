@@ -1,5 +1,4 @@
-import { Image, View } from "react-native";
-import { StyleSheet } from "react-native-web";
+import { Image, Pressable, StyleSheet, View } from "react-native";
 import { kNumFormatter } from "../utils";
 import Text from "./Text";
 import theme from "../theme";
@@ -41,9 +40,6 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: theme.padding.default,
-    borderBottomColor: theme.colors.textSecondary,
-    borderBottomWidth: 5,
-    borderBottomStyle: "solid,",
   },
   flexContainerTwo: {
     // width: 0,
@@ -69,9 +65,21 @@ const styles = StyleSheet.create({
     borderRadius: theme.borderRadius.button,
     flexShrink: 1,
   },
+  openInGithub: {
+    padding: 15,
+    backgroundColor: theme.colors.blue,
+    borderRadius: 4,
+    marginTop:theme.margin.default,
+    maxWidth: 700,
+
+  },
+  openInGithubText: {
+    color: theme.colors.white,
+    alignSelf: "center",
+  },
 });
 
-const RepositoryItem = ({ item }) => {
+const RepositoryItem = ({ item, navigateToGithub }) => {
   return (
     <View style={styles.container}>
       <View style={styles.flexContainerOne}>
@@ -82,23 +90,28 @@ const RepositoryItem = ({ item }) => {
           />
         </View>
         <View style={styles.flexContainerTwo}>
-          <View style={styles.fullName}>
+          <View style={styles.fullName} testID="fullName">
             <Text fontWeight="bold">{item.fullName}</Text>
           </View>
-          <View>
+          <View testID="description">
             <Text>{item.description}</Text>
           </View>
-          <View style={styles.language}>
+          <View testID="language" style={styles.language}>
             <Text>{item.language}</Text>
           </View>
         </View>
       </View>
-      <View style={styles.flexContainerThree}>
-        <FlexItem text="stars" value={item.stargazersCount} />
-        <FlexItem text="forks" value={item.forksCount} />
-        <FlexItem text="review" value={item.reviewCount} />
-        <FlexItem text="rating" value={item.ratingAverage} />
+      <View testID="statsBar" style={styles.flexContainerThree}>
+        <FlexItem testID="stars" text="stars" value={item.stargazersCount} />
+        <FlexItem testID="forks" text="forks" value={item.forksCount} />
+        <FlexItem testID="review" text="review" value={item.reviewCount} />
+        <FlexItem testID="rating" text="rating" value={item.ratingAverage} />
       </View>
+      {navigateToGithub && (
+        <Pressable onPress={navigateToGithub} style={styles.openInGithub}>
+          <Text style={styles.openInGithubText}>Open In Github</Text>
+        </Pressable>
+      )}
     </View>
   );
 };

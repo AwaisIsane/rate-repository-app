@@ -40,6 +40,8 @@ const AppBar = () => {
   const items = [
     { to: "/", text: "Repositories" },
     { to: "/signin", text: "SignIn" },
+    { to: "/review", text: "addReview" },
+    { to: "/signup", text: "SignUp" },
   ];
 
   const authenticated = loading ? null : data.me;
@@ -48,19 +50,28 @@ const AppBar = () => {
     await authStorage.removeAccessToken();
     apolloClient.resetStore();
   };
-  return (
-    <View style={styles.container}>
-      <ScrollView horizontal>
-        <Tabs {...items[0]} />
-        {authenticated ? (
+
+  if (authenticated) {
+    return (
+      <View style={styles.container}>
+        <ScrollView horizontal>
+          <Tabs {...items[0]} />
+          <Tabs {...items[2]} />
           <Pressable onPress={signout} style={styles.button}>
             <Text color="textSecondary" fontWeight="bold" style={styles.text}>
               Logout
             </Text>
           </Pressable>
-        ) : (
-          <Tabs {...items[1]} />
-        )}
+        </ScrollView>
+      </View>
+    );
+  }
+  return (
+    <View style={styles.container}>
+      <ScrollView horizontal>
+        <Tabs {...items[0]} />
+        <Tabs {...items[1]} />
+        <Tabs {...items[3]} />
       </ScrollView>
     </View>
   );
