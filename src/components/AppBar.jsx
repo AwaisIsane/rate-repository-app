@@ -42,6 +42,8 @@ const AppBar = () => {
     { to: "/signin", text: "SignIn" },
     { to: "/review", text: "addReview" },
     { to: "/signup", text: "SignUp" },
+    { to: "/reviewview", text: "reviews" },
+
   ];
 
   const authenticated = loading ? null : data.me;
@@ -57,6 +59,7 @@ const AppBar = () => {
         <ScrollView horizontal>
           <Tabs {...items[0]} />
           <Tabs {...items[2]} />
+          <Tabs {...items[4]} />
           <Pressable onPress={signout} style={styles.button}>
             <Text color="textSecondary" fontWeight="bold" style={styles.text}>
               Logout
